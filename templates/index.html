@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>在线选座</title>
+    <style>
+        body{
+            background-color: cyan;
+        }
+        .head{
+            text-align: center;
+        }
+        .text{
+            padding: 8px 10px 8px 10px;
+            border-radius: 8px;
+            margin: 0 0;
+        }
+        .button{
+            margin: 10px;
+            padding-right: 10px;
+            text-align: center;
+            width: 100%;
+
+        }
+        input[type=submit]{
+            width: 20%;
+            color: white;
+            padding: 10px 20px 20px 20px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            background-image: url("/static/login.jpg");
+        }
+    </style>
+</head>
+<body>
+    <div class="head">
+<h1>
+    图 书 馆 座 位 管 理 系 统
+</h1>
+    <hr>
+    <h2>
+        在 线 选 座
+    </h2>
+</div>
+    <div class="text">
+    <h3>用户：{{ name }}</h3>
+    <h4>欢迎登录图书座位管理系统</h4>
+    <h4>共有三种类型，请选择一个喜欢的座位吧</h4>
+    </div>
+    <div class="button">
+    <form action="/seat/A/" method="post">
+        {% csrf_token %}
+        <input name="A" type="submit" value="自习室">
+    </form>
+
+    <form action="/seat/B/" method="post">
+        {% csrf_token %}
+        <input name="B" type="submit" value="标准区">
+    </form>
+
+    <form action="/seat/C/" method="post">
+        {% csrf_token %}
+        <input name="C" type="submit" value="休闲区">
+    </form>
+        </div>
+</body>
+</html>

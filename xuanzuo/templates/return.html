@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ msg }}</title>
+    <style>
+        body{
+            background-color: cyan;
+        }
+        .text{
+            text-align: center;
+            tab-size: 400px;
+        }
+        .table{
+            border-radius: 5px;
+            font-family: Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            width: 30%;
+            text-align: center;
+        }
+        tr {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            background-color: skyblue;
+            color: white;
+            text-align: center;
+        }
+        input[type=text]{
+            width: 7%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+         input[type=submit]{
+            width: 10%;
+            background-color: #4CAF50;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .from1{
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+<div class="text">
+    <h1>{{ msg }}</h1>
+    <h2>
+        开 始 选 座
+    </h2>
+</div>
+<div class="from1">
+<table border="1" class="table">
+    <tr>
+        <td style="background-color: slategrey">所在楼层</td>
+        <td style="background-color: slategrey">座位编号</td>
+        <td style="background-color: slategrey">靠近电源</td>
+        <td style="background-color: slategrey">靠近走廊</td>
+    </tr>
+        {% if infor_list %}                {#如果查询的数据不为空，则将数据全部遍历出来#}
+            {% for i in infor_list %}
+            <tr>
+                <td>{{ i.floor }}</td>
+
+                <td>{{ i.id }}</td>
+                {% if i.power == 0 %}     {#判断座位其他信息#}
+                    <td>否</td>
+                {% else %}
+                    <td>是</td>
+                {% endif %}
+
+                {% if i.stairs == 0 %}
+                    <td>否</td>
+                {% else %}
+                    <td>是</td>
+                {% endif %}
+            </tr>
+            {% endfor %}
+             <h2>当前共有 {{ len }} 个座位可以选择</h2>
+        {% else %}
+            未获取到任何数据
+        {% endif %}
+    </table>
+<!-- <div class="select">
+    <form action="/seat/select" method="post">
+        {% csrf_token %}
+        <input type="submit" name="power" value="靠近电源 ">     
+        <input type="submit" name="stairs" value="靠近走廊"><hr>
+    </form>
+</div> -->
+</div>    
+
+
+<form method="post" action="/seat/response/">
+{% csrf_token %}
+    <p>请输入所选座位的编号:<input name="select_id" type="text" required="required"></p>
+    <input type="submit" name="select" value="选座">
+</form>
+<form method="post" action="/denglu/">
+    {% csrf_token %}
+        <input type="submit" name="select" value=" 回到主页">
+</form><br>
+
+</body>
+</html>

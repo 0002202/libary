@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>预约选座</title>
+</head>
+<body>
+<h1>
+    预 约 座 位
+</h1>
+<h2>
+    为了更好的服务用户，现可以进行预约座位，每人一次预约机会
+</h2>
+<div>
+    <form method="post" action="/seat/order/">
+        {% csrf_token %}
+        <input type="submit" value="预约">
+    </form>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>结果显示</title>
+    <style>
+        .text{
+            text-align: center;
+            tab-size: 200px;
+        }
+        .mform{
+            text-align: center;
+            size: auto;
+        }
+    </style>
+</head>
+<body>
+<div class="text">
+    <h1>
+    选座成功！！！
+    </h1>
+    <h2>
+        您有10秒钟的时间入馆签到，若时间不允许，可以取消预约重新选座；若超时签到，将被扣除信誉积分！
+    </h2>
+    <h2>
+        座位所在楼层：{{ floor }}
+    </h2>
+    <h2>
+        你选择的座位号为：{{ msg }}
+    </h2>
+</div>
+<form method="post" action="/seat/sign_in/" class="mform">
+    {% csrf_token %}
+    <input type="submit" name="sign" value="签到">
+</form>
+<form method="post" action="/seat/leave/" class="mform">
+    {% csrf_token %}
+    <input type="submit" name="leave" value="取消预约">
+</form>
+</body>
+</html>

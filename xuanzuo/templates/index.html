@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>在线选座</title>
+    <style>
+        body{
+            background-color: cyan;
+        }
+        .head{
+            text-align: center;
+        }
+        .text{
+            padding: 8px 10px 8px 10px;
+            border-radius: 8px;
+            margin: 0 0;
+        }
+        .button{
+            margin: 10px;
+            padding-right: 10px;
+            text-align: center;
+            width: 100%;
+
+        }
+        input[type=submit]{
+            width: 30%;
+            color:cornflowerblue;
+            padding: 10px 20px 20px 20px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        .select{
+            float: left;
+        }
+    </style>
+</head>
+<body>
+    <div class="head">
+<h1>
+    图 书 馆 座 位 管 理 系 统
+</h1>
+    <hr>
+    <h2>
+        在 线 选 座
+    </h2>
+</div>
+<div class="text">
+    <h3><i>用户：{{ uid }}</i></h3>
+    <h3><i>当前信誉积分：{{ integral }}</i></h3>
+    <h4>欢迎登录图书座位管理系统</h4>
+    <h4>共有三种类型，请选择一个喜欢的座位吧</h4>
+    <h4>也可以尝试随机选座，快速找到座位</h4>
+</div>
+    <p style="color: red">{{ msg }}</p>
+    <form method="post" action="/seat/leave/">
+    {% csrf_token %}
+        <input type="submit" name="select" value="退出登录">
+</form>
+<h2><i>过滤座位</i></h2>
+    <!-- <h4>可以选择优先查询</h4> -->
+    <h2>
+        <i>进行预约座位</i>
+    </h2>
+     <form method="post" action="/seat/show_order/">
+    {% csrf_token %}
+        <input type="submit" name="select" value="预约座位">
+</form>
+<div class="select">
+
+    <form action="/seat/filter/" method="post" name="formName">
+        {% csrf_token %}
+        选择条件：
+        <select name="select_room">
+            <!-- <option id =''>所有类型</option> -->
+            <option id="zx">自习室</option>
+            <option id="bz">标准区</option>
+            <option id="xx">休闲区</option>
+        </select>
+        <select name="select_floor">
+            <!-- <option id="">所有楼层</option> -->
+            <option id="f1">一楼</option>
+            <option id="f2">二楼</option>
+            <option id="f3">三楼</option>
+            <option id="f4">四楼</option>
+            <option id="f5">五楼</option>
+        </select>
+    </div>
+        <input type="checkbox" name="power">靠近电源      
+        <input type="checkbox" name="stairs">靠近走廊<hr>
+        <!-- 优先查询：
+        <select name="priority">
+            <option id="room">座位类型</option>
+            <option id="floor">楼层</option>
+            <option id="power">靠近电源</option>
+            <option id="stairs">靠近走廊</option>
+        </select> -->
+        <input type="submit" name="button" value="查询">
+    </form>
+
+
+ <div class="button">
+    <form action="/seat/A/" method="post">
+        {% csrf_token %}
+        <input name="A" type="submit" value="自习室">
+    </form>
+
+    <form action="/seat/B/" method="post">
+        {% csrf_token %}
+        <input name="B" type="submit" value="标准区">
+    </form>
+
+    <form action="/seat/C/" method="post">
+        {% csrf_token %}
+        <input name="C" type="submit" value="休闲区">
+    </form>
+    <form method="post" action="/seat/random/">
+        {% csrf_token %}
+        <input type="submit" name="select" value="随机选座">
+    </form>
+</div>
+</body>
+</html>

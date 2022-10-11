@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>结果显示</title>
+    <style>
+        .text{
+            text-align: center;
+            tab-size: 200px;
+        }
+        .mform{
+            text-align: center;
+            size: auto;
+        }
+    </style>
+</head>
+<body>
+<div class="text">
+    <h1>
+    暂时没有空座/没有此类型座位
+    </h1>
+</div>
+<form method="post" action="/login/" class="mform">
+    {% csrf_token %}
+    <input type="submit" name="sign" value="重新选座">
+</form>
+</body>
+</html>

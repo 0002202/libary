@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>login</title>
+    <style>
+        body{
+            background-color: cyan;
+        }
+        .head{
+            text-align: center;
+        }
+        input[type=text]{
+            width: 50%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-sizing: border-box;
+        }
+        input[type=password]{
+            width: 50%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-sizing: border-box;
+        }
+        input[type=submit]{
+            width: 30%;
+            background-color: #4CAF50;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .mform{
+            text-align: center;
+            border-radius: 10px;
+            background-color:white;
+            padding: 25px;
+            width: 500px;
+            height: 350px;
+            margin: auto;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+        }
+    </style>
+</head>
+<body>
+<div class="head">
+<h1>
+    图 书 馆 座 位 管 理 系 统
+</h1>
+    <hr>
+    <h2>
+        登    录
+    </h2>
+</div>
+
+<div class="mform">
+    <br>
+    <br>
+    <form action="/denglu/" method="post">
+    {% csrf_token %}
+    <input type="text" name="user_id" required="required" placeholder="学号"><br>
+    <input type="password" name="password" required="required" placeholder=密码><br><br><br><br>
+    <input type="submit" name="button" value="登录"><br>
+    <p>还未注册？<a href="{% url 'register' %}">点击注册</a></p>
+
+    </form>
+
+</div><br><br>
+<hr>
+<h3 style="text-align: center; color: red">
+    {{ msg }}     <!--返回一个状态-->
+</h3>
+
+
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>结果显示</title>
+    <style>
+        .buttons{
+            margin: 10px;
+            padding-right: 10px;
+            text-align: center;
+            width: 100%;           
+        }
+                    
+        input[type=submit]{
+            width: 10%;
+            background-color: #4CAF50;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .table{
+            border-radius: 5px;
+            font-family: Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            width: 30%;
+            text-align: center;
+        }
+        tr {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            background-color: skyblue;
+            color:burlywood
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<h2>
+    随机座位信息：
+</h2>
+<table border="1" class="table">
+    <tr>
+        <td style="background-color: slategrey">所在楼层</td>
+        <td style="background-color: slategrey">座位类型</td>
+        <td style="background-color: slategrey">座位编号</td>
+        <td style="background-color: slategrey">靠近电源</td>
+        <td style="background-color: slategrey">靠近走廊</td>
+    </tr>
+        <tr>
+            <td>{{ f }}</td>
+            {% if 'z' in n %}
+                <td>自习区</td>
+            {% elif 'b' in n %}
+                <td>标准区</td>
+            {% else %}
+                <td>休闲区</td>
+            {% endif %}
+            <td>{{ n }}</td>           {# 编号 #}
+            {% if p == 0 %}
+                <td>否</td>
+            {% else %}
+                <td>是</td>
+            {% endif %}
+            
+            {% if s == 0 %}
+                <td>否</td>
+            {% else %}
+                <td>是</td>
+            {% endif %}
+        </tr>
+</table>
+<div class="buttons"></div>
+    <form method="post" action="/seat/random/">
+        {% csrf_token %}
+        <input type="submit" name="sign" value="再次随机">
+    </form>
+    <form method="post" action="/seat/response/">
+        {% csrf_token %}
+        <input type="submit" name="sign" value="确认选座">
+    </form>
+    <form method="post" action="/login/">
+        {% csrf_token %}
+        <input type="submit" name="sign" value="退出选座">
+    </form>
+</div>
+</body>
+</html>
